@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>유튜브 자동 반복재생</title>
+  <style>
+    /* 화면 가득, 반응형 16:9 */
+    html, body { height: 100%; margin: 0; background: #000; }
+    .wrap { position: relative; width: 100%; height: 100%; overflow: hidden; }
+    .video { position: absolute; inset: 0; }
+    /* 16:9 비율 유지 */
+    .video::before { content: ""; display: block; padding-top: 56.25%; }
+    .video > iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+    /* 필요 시 페이지 내 설명 텍스트 스타일 */
+    .hint { position: absolute; left: 12px; bottom: 12px; color: #fff; font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple SD Gothic Neo, Noto Sans KR, "맑은 고딕", sans-serif; opacity: .75; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="video">
+      <!--
+        사용법:
+        1) VIDEO_ID 를 실제 유튜브 영상 ID로 교체하세요 (예: dQw4w9WgXcQ)
+        2) autoplay/loop 가 확실히 동작하도록 playlist=VIDEO_ID 가 필수입니다.
+        3) 모바일 자동재생을 위해 mute=1, playsinline=1 이 포함되어 있습니다.
+        4) 시작/끝 시점을 지정하려면 start=초, end=초 파라미터를 추가하세요. (예: &start=30&end=90)
+      -->
+      <iframe
+        id="ytplayer"
+        src="https://www.youtube.com/embed/PhKqv4aNQ10?autoplay=1&mute=0&loop=1&playlist=PhKqv4aNQ10&controls=1&modestbranding=1&rel=0&playsinline=0"
+        title="YouTube video player"
+        allow="autoplay; encrypted-media; picture-in-picture;"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <div class="hint">영상 ID만 바꾸면 자동 반복 재생됩니다. (음소거 자동재생)</div>
+  </div>
+
+  <!-- 필요 시 API 사용 예시 (선택 사항): 특정 시점부터 시작하도록 로드 후 이동)
+  <script>
+    // 아래 스니펫은 선택 사항입니다. 특정 시점 이동 등 제어가 필요할 때만 사용하세요.
+    // enablejsapi=1 를 iframe src 에 추가해야 합니다.
+    //
+    // function onYouTubeIframeAPIReady(){
+    //   const player = new YT.Player('ytplayer', {
+    //     events: { onReady: () => player.seekTo(30, true) }
+    //   });
+    // }
+    // const tag = document.createElement('script');
+    // tag.src = 'https://www.youtube.com/iframe_api';
+    // document.head.appendChild(tag);
+  </script>
+  -->
+</body>
+</html>
